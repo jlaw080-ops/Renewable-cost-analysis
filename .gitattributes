@@ -1,0 +1,9 @@
+# 줄바꿈 정규화 — 저장소에는 LF로 통일, 체크아웃 시 OS에 맞춰 변환
+* text=auto eol=lf
+
+# 바이너리(폰트 등)는 변환 금지
+*.otf binary
+*.ttf binary
+*.png binary
+*.jpg binary
+*.pdf binary
