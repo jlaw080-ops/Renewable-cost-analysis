@@ -50,7 +50,7 @@ npm run lint     # ESLint
 ### 구현 현황 (MVP 완료)
 - 계산 코어 `src/lib/calc/*` — 순수함수 6모듈(소비량·요금·태양광·연료전지·절감·경제성) + 체인. 55개 테스트 통과.
 - 5탭 UI: 입력 → 소비량/요금 → 생산·절감 → 경제성 → 리포트. 전력/가스 절감 분리 표시.
-- PDF 리포트(A4, 한글 Pretendard 임베드) + 검토안 저장(localStorage 기본, Supabase 선택).
+- PDF 리포트(A4, 한글 Pretendard 임베드) + 검토안 저장(localStorage 기본, GitHub Gist 온라인 선택).
 
 ### 빌드 순서 기록
-구현 진행 순서는 `docs/BUILD_PLAN.md`, Supabase 연결은 `docs/supabase-setup.md` 참조.
+구현 진행 순서는 `docs/BUILD_PLAN.md`, 온라인 저장(GitHub Gist) 연결은 `docs/github-storage-setup.md` 참조.

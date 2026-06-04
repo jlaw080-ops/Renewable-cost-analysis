@@ -7,7 +7,7 @@
 | 언어 | TypeScript (strict) | 타입 안전성 |
 | 스타일 | Tailwind CSS | UI 스타일링 |
 | 차트 | Recharts | 결과 그래프 |
-| DB | Supabase (PostgreSQL) | 검토안 저장/불러오기 |
+| 저장 | GitHub Gist (서버 API) / localStorage 폴백 | 검토안 저장/불러오기 (무료, 토큰은 서버 전용) |
 | PDF | @react-pdf/renderer | 리포트 다운로드 |
 | 테스트 | Vitest | 계산 로직 단위 테스트 |
 | 린트 | ESLint + Prettier | 코드 품질 |
@@ -19,7 +19,7 @@ src/
 ├── app/
 │   ├── page.tsx                 # 메인 (탭 컨테이너)
 │   ├── layout.tsx
-│   └── api/scenarios/route.ts   # 검토안 저장/조회 (Supabase)
+│   └── api/scenarios/route.ts   # 검토안 저장/조회 (GitHub Gist, 서버 토큰)
 ├── components/
 │   ├── input/                   # 용도·연면적·계약전력·일간사용시간 / 태양광 / 연료전지 / 경제성 입력
 │   ├── results/                 # 소비량·요금·절감·경제성 결과 테이블/차트
@@ -33,7 +33,7 @@ src/
 │   │   ├── savings.ts           # E. 절감액·절감률
 │   │   └── economics.ts         # G. NPV/IRR/회수기간
 │   ├── libraries/               # JSON 라이브러리 로더 + 검증
-│   └── supabase/                # Supabase 클라이언트
+│   └── storage/                 # 검토안 저장 (gist.ts 서버 + scenarios.ts 클라이언트/localStorage)
 ├── data/                        # 라이브러리 원본 (JSON, 첨부 파일 형식)
 │   ├── 용도라이브러리.json           # 신규 (전력 원단위)
 │   ├── 전기요금라이브러리.json        # 이전 데이터 + 시간대구분 추가
@@ -56,7 +56,7 @@ src/
    → 결과 객체
         ├─ components/results 로 화면 렌더 (테이블 + Recharts)
         ├─ components/report 로 PDF 생성
-        └─ (저장 시) api/scenarios → Supabase 에 검토안 저장
+        └─ (저장 시) api/scenarios → GitHub Gist(또는 localStorage)에 검토안 저장
 ```
 
 ## 상태 관리

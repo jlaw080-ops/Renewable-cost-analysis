@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { useScenario } from "@/components/ScenarioContext";
 import { Button, Card } from "@/components/ui/primitives";
 import {
+  currentBackend,
   deleteScenario,
   listScenarios,
   saveScenario,
-  storageBackend,
+  type Backend,
   type SavedScenario,
 } from "@/lib/storage/scenarios";
 
@@ -16,12 +17,14 @@ export function ReportPanel() {
   const { input, result, setInput } = useScenario();
   const [name, setName] = useState(input.이름 ?? "검토안");
   const [saved, setSaved] = useState<SavedScenario[]>([]);
+  const [backend, setBackend] = useState<Backend | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
   const refresh = async () => {
     try {
       setSaved(await listScenarios());
+      setBackend(await currentBackend());
     } catch (e) {
       setMsg(e instanceof Error ? e.message : "목록 조회 실패");
     }
@@ -98,7 +101,7 @@ export function ReportPanel() {
 
       <Card
         title="검토안 저장 / 불러오기"
-        desc={`저장 위치: ${storageBackend() === "supabase" ? "Supabase" : "브라우저(localStorage)"} · 입력값만 저장하고 불러올 때 재계산합니다.`}
+        desc={`저장 위치: ${backend === "github" ? "GitHub Gist (온라인)" : "브라우저(localStorage)"} · 입력값만 저장하고 불러올 때 재계산합니다.`}
       >
         <div className="mb-4 flex items-end gap-2">
           <label className="flex-1">

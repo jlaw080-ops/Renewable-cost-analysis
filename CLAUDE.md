@@ -7,7 +7,7 @@
 - Next.js 15 (App Router)
 - TypeScript (strict mode)
 - Tailwind CSS / 차트는 Recharts
-- Supabase (검토안 저장)
+- 검토안 저장: GitHub Gist(서버 API 라우트, 무료) / 미설정 시 localStorage 폴백
 - PDF: @react-pdf/renderer
 - 테스트: Vitest
 
@@ -15,6 +15,7 @@
 - CRITICAL: 모든 계산 결과는 `docs/calculation-formulas.md`와 정확히 일치해야 한다. 수식을 임의로 바꾸지 말 것. 변경이 필요하면 먼저 그 문서를 고치고 코드를 맞춘다.
 - CRITICAL: 계산 로직(`src/lib/calc/*`)은 부수효과 없는 순수함수로 작성하고, 각 함수에 단위 테스트를 둔다.
 - CRITICAL: 연료전지 계산은 이전 앱 로직을 이식해 `src/lib/calc/fuelcell.ts`에 격리한다. 발전수익·열생산수익·가스사용요금 수식을 바꾸지 않는다.
+- 검토안 저장은 GitHub Gist(서버 API `app/api/scenarios`) 또는 localStorage. 토큰은 서버 전용 env(`GITHUB_TOKEN`/`GITHUB_GIST_ID`)에만 둔다 — `NEXT_PUBLIC` 금지. Supabase는 사용하지 않는다.
 - CRITICAL: `any` 타입 사용 금지. 입력·결과는 `src/types`에 명시적 타입으로 정의한다.
 - 요금·원단위 등 데이터는 코드가 아니라 `src/data/*.json` 라이브러리에 둔다.
 - 계산 결과는 DB에 저장하지 않는다. 검토안(입력값)만 저장하고 불러올 때 재계산한다.

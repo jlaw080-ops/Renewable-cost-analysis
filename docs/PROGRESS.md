@@ -30,7 +30,7 @@ UI_GUIDE 준수(그린 액센트 1색, 숫자 우측정렬·고정폭·콤마, �
 
 ### Phase 4 — 리포트 & 저장
 - `report/ReportDocument.tsx` — @react-pdf/renderer A4 PDF, 한글 Pretendard(`public/fonts/*.otf`) 임베드. PDF 텍스트 추출로 검증.
-- `lib/storage/scenarios.ts` — 검토안(입력값만) 저장. **localStorage 기본**, env 있으면 Supabase. 4 테스트.
+- `lib/storage/scenarios.ts` + `gist.ts` + `app/api/scenarios/route.ts` — 검토안(입력값만) 저장. **localStorage 기본**, env 있으면 **GitHub Gist(서버 라우트, 무료)**. 6 테스트.
 
 ---
 
@@ -57,7 +57,7 @@ UI_GUIDE 준수(그린 액센트 1색, 숫자 우측정렬·고정폭·콤마, �
 | 연료전지(F)·경제성(G) **이전 앱 실제 수치 대조** | **미완** | `docs/references/output*.json`이 전부 null(스키마)이라 실제 이전 앱 출력과 1:1 대조는 못 함. 현재는 `calculation-formulas.md` 수식 기준으로만 검증. 이전 앱 실데이터 확보 시 회귀 테스트 추가 필요 |
 | 부가세·기금 가산/차감 방향 | 가산(×1.1×1.032)으로 구현 | 수식 정의서 표기를 따름(README가 "이전 코드 기준 확인" 요구) |
 | ROI 정의(초기투자/총비용) | calc §G-3대로 구현 | "(이전 앱 정의 확인)" 주석 — 실코드 대조 미완 |
-| Supabase 실연결 | 미실증 | creds 없어 localStorage만 실증. SQL은 `docs/supabase-setup.md` |
+| GitHub Gist 실연결 | 미실증 | token/gist-id 없어 localStorage만 실증. 설정은 `docs/github-storage-setup.md` |
 
 ### D. 폴리시/배포 (미진행)
 - Vercel 배포(ARCHITECTURE 명시) 미수행.
@@ -65,4 +65,4 @@ UI_GUIDE 준수(그린 액센트 1색, 숫자 우측정렬·고정폭·콤마, �
 - `next lint` → Next 16 대비 ESLint CLI 마이그레이션 권고 메시지 있음.
 
 ## 범위 조정 사항
-- ARCHITECTURE의 `app/api/scenarios/route.ts`(서버 경유) → anon 키 MVP 단순화를 위해 클라이언트 직접 접근으로 대체. 사유·복귀 조건은 `docs/supabase-setup.md`에 기록.
+- 검토안 저장을 Supabase → **GitHub Gist**로 변경(ADR-009). 토큰 보호를 위해 서버 라우트 `app/api/scenarios` 사용(ARCHITECTURE 원안 구조로 복귀). 계산·UI·PDF 불변. 설정: `docs/github-storage-setup.md`.
